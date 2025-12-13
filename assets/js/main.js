@@ -7,13 +7,21 @@
         content.classList.remove('fade-in');
       }, 320);
     }
-    var navLinks = document.querySelectorAll('.top__link[href], .top__link.active[href]');
+    var navLinks = document.querySelectorAll('.top__link[href]');
     navLinks.forEach(function(link) {
       var href = link.getAttribute('href');
-      if (href && (href.indexOf('sphere.html') !== -1 || href.indexOf('about.html') !== -1)) {
+      // Only handle Main/About links
+      if (href && (href.indexOf('index.html') !== -1 || href.indexOf('about.html') !== -1)) {
         link.addEventListener('click', function(e) {
-          if (window.location.pathname.endsWith(href)) return;
+          // If already on this page or link is active, do nothing
+          if (link.classList.contains('active') || window.location.pathname.endsWith(href)) {
+            e.preventDefault();
+            return;
+          }
           e.preventDefault();
+          // Save theme to sessionStorage for instant restore on next page
+          var theme = localStorage.getItem('site-theme');
+          if (theme) sessionStorage.setItem('pending-theme', theme);
           if (content) {
             content.classList.add('fade-out');
             setTimeout(function() {

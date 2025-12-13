@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
 <script>
-// Set theme class and background color before anything else
+// Set theme class and background color before anything else, using sessionStorage for instant theme on navigation
 (function() {
   try {
-    var theme = localStorage.getItem('site-theme');
+    var theme = sessionStorage.getItem('pending-theme') || localStorage.getItem('site-theme');
     var midnight = 'scheme-midnight', daylight = 'scheme-daylight';
     var html = document.documentElement, body = document.body;
     var set = function(cls, bg) {
@@ -17,6 +17,7 @@
     if (theme === midnight) set(midnight, '#191b1f');
     else if (theme === daylight) set(daylight, '#f7f8fa');
     else set(midnight, '#191b1f');
+    sessionStorage.removeItem('pending-theme');
   } catch(e) {}
 })();
 </script>

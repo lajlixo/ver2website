@@ -1,32 +1,27 @@
 <!doctype html>
-<html lang="en" style="background:#191b1f;">
+<html lang="en">
 <head>
 <script>
 // Set theme class and background color before anything else
 (function() {
   try {
     var theme = localStorage.getItem('site-theme');
-    if (theme === 'scheme-midnight') {
-      document.documentElement.className = 'scheme-midnight';
-      document.body.className = 'scheme-midnight';
-      document.documentElement.style.background = '#191b1f';
-      document.body.style.background = '#191b1f';
-    } else if (theme === 'scheme-daylight') {
-      document.documentElement.className = 'scheme-daylight';
-      document.body.className = 'scheme-daylight';
-      document.documentElement.style.background = '#f7f8fa';
-      document.body.style.background = '#f7f8fa';
-    } else {
-      document.documentElement.className = 'scheme-midnight';
-      document.body.className = 'scheme-midnight';
-      document.documentElement.style.background = '#191b1f';
-      document.body.style.background = '#191b1f';
-    }
+    var midnight = 'scheme-midnight', daylight = 'scheme-daylight';
+    var html = document.documentElement, body = document.body;
+    var set = function(cls, bg) {
+      html.className = cls;
+      body.className = cls;
+      html.style.background = bg;
+      body.style.background = bg;
+    };
+    if (theme === midnight) set(midnight, '#191b1f');
+    else if (theme === daylight) set(daylight, '#f7f8fa');
+    else set(midnight, '#191b1f');
   } catch(e) {}
 })();
 </script>
 <meta name="theme-color" content="#191b1f" media="(prefers-color-scheme: dark)">
-<style>html,body{background:#191b1f !important;transition:none !important;}body.scheme-daylight,html.scheme-daylight{background:#f7f8fa !important;transition:none !important;}</style>
+<style>html,body{background:#191b1f !important;transition:none !important;}body.scheme-daylight,html.scheme-daylight{background:#f7f8fa !important;transition:none !important;}html,body{transition:none !important;}</style>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>About Me - Sphere</title>
@@ -47,7 +42,7 @@
   </div>
   <nav class="top__right">
      <div class="links">
-       <a href="sphere.html" class="top__link" style="margin-left:0;cursor:pointer;">Main</a>
+       <a href="index.html" class="top__link" style="margin-left:0;cursor:pointer;">Main</a>
       <a href="about.html" class="top__link active" style="margin-left:16px;cursor:pointer;">About</a>
        <button id="contactBtn" class="top__link" style="margin-left:16px;cursor:pointer;">Contact</button>
      </div>
@@ -72,9 +67,6 @@
 </section>
 <footer class="site-footer">
   <p class="footer-left">© 2025 Your Brand or Name</p>
-  <p class="footer-right">
-    <a href="https://onepagelove.com/sphere">Sphere Template</a> by One Page Love
-  </p>
 </footer>
 
 </body>

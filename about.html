@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en" style="background:#191b1f;">
+<head>
+<script>
+// Set theme class and background color before anything else
+(function() {
+  try {
+    var theme = localStorage.getItem('site-theme');
+    if (theme === 'scheme-midnight') {
+      document.documentElement.className = 'scheme-midnight';
+      document.body.className = 'scheme-midnight';
+      document.documentElement.style.background = '#191b1f';
+      document.body.style.background = '#191b1f';
+    } else if (theme === 'scheme-daylight') {
+      document.documentElement.className = 'scheme-daylight';
+      document.body.className = 'scheme-daylight';
+      document.documentElement.style.background = '#f7f8fa';
+      document.body.style.background = '#f7f8fa';
+    } else {
+      document.documentElement.className = 'scheme-midnight';
+      document.body.className = 'scheme-midnight';
+      document.documentElement.style.background = '#191b1f';
+      document.body.style.background = '#191b1f';
+    }
+  } catch(e) {}
+})();
+</script>
+<meta name="theme-color" content="#191b1f" media="(prefers-color-scheme: dark)">
+<style>html,body{background:#191b1f !important;transition:none !important;}body.scheme-daylight,html.scheme-daylight{background:#f7f8fa !important;transition:none !important;}</style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>About Me - Sphere</title>
+<meta name="description" content="About Me page for lajlixo's portfolio." />
+<link rel="canonical" href="https://yourdomain.com/about" />
+<meta name="robots" content="index,follow" />
+<link rel="icon" href="./assets/img/global/favicon.ico" sizes="any" />
+<link rel="stylesheet" href="./assets/css/colors.css?v=0.8" />
+<link rel="stylesheet" href="./assets/css/styles.css?v=0.8" />
+<script defer src="./assets/js/siema.min.js?v=0.8"></script>
+<script defer src="./assets/js/main.js?v=0.8"></script>
+</head>
+<body>
+<header class="top">
+  <div class="top__left">
+    <img class="top__avatar" src="./assets/img/global/avatar.jpg" alt="Name" />
+    <span class="top__brand">lajlixo</span>
+  </div>
+  <nav class="top__right">
+     <div class="links">
+       <a href="sphere.html" class="top__link" style="margin-left:0;cursor:pointer;">Main</a>
+      <a href="about.html" class="top__link active" style="margin-left:16px;cursor:pointer;">About</a>
+       <button id="contactBtn" class="top__link" style="margin-left:16px;cursor:pointer;">Contact</button>
+     </div>
+     <button id="themeToggle" class="top__link" style="margin-left:24px;cursor:pointer;" aria-label="Toggle dark/light mode">🌙</button>
+  </nav>
+</header>
+<div id="contactModal" class="modal">
+  <div class="modal-content">
+    <span class="close" id="closeModal">&times;</span>
+    <h2>Contact Information</h2>
+    <p><strong>Email:</strong> <a href="mailto:lajlixo@gmail.com" style="font-weight:normal;">lajlixo@gmail.com</a></p>
+    <p><strong>Discord:</strong> <span style="font-weight:normal;">lajlixo</span></p>
+    <p><strong>Roblox:</strong> <a href="https://www.roblox.com/users/10013585857" style="font-weight:normal;">lajlixo</a></p>
+    <p>Or use the <button id="gotoContact" class="modal-link-btn" style="background:none;border:none;color:#6cf;cursor:pointer;text-decoration:underline;font:inherit;padding:0;">contact</button> form on our website.</p>
+  </div>
+</div>
+<section class="hero">
+  <div class="boxed">
+    <h1 class="overview">About Me</h1>
+    <p style="max-width:600px;margin:32px auto 0 auto;font-size:1.2rem;line-height:1.7;">Hi, I'm lajlixo!<br><br>This is my About Me page. You can add your biography, skills, experience, or anything you want to share here. This page uses the same style and theme as the main Sphere page for a consistent look and feel.<br><br>Use the Main button above to return to the main page.</p>
+  </div>
+</section>
+<footer class="site-footer">
+  <p class="footer-left">© 2025 Your Brand or Name</p>
+  <p class="footer-right">
+    <a href="https://onepagelove.com/sphere">Sphere Template</a> by One Page Love
+  </p>
+</footer>
+
+</body>
+</html>

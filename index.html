@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script>
+// Prevent flash of wrong background by setting theme class before render
+try {
+  var theme = localStorage.getItem('site-theme');
+  if (theme === 'scheme-midnight' || theme === 'scheme-daylight') {
+    document.documentElement.className = theme;
+    document.body.className = theme;
+  }
+} catch(e) {}
+</script>
+<script>
+// Set theme class and background color before anything else
+try {
+  var theme = localStorage.getItem('site-theme');
+  if (theme === 'scheme-midnight') {
+    document.documentElement.className = 'scheme-midnight';
+    document.body.className = 'scheme-midnight';
+    document.documentElement.style.background = '#191b1f';
+    document.body.style.background = '#191b1f';
+  } else if (theme === 'scheme-daylight') {
+    document.documentElement.className = 'scheme-daylight';
+    document.body.className = 'scheme-daylight';
+    document.documentElement.style.background = '#f7f8fa';
+    document.body.style.background = '#f7f8fa';
+  }
+} catch(e) {}
+</script>
+<meta name="theme-color" content="#191b1f" media="(prefers-color-scheme: dark)">
+<style>html,body{background:#191b1f !important;}body.scheme-daylight,html.scheme-daylight{background:#f7f8fa !important;}</style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<!-- SEO -->  
+<title>lajlixo's portfolio</title>
+<meta name="description" content="A short, clear description of your portfolio or service (max ~155 characters)." />
+<link rel="canonical" href="https://yourdomain.com/" />
+<meta name="robots" content="index,follow" />
+
+<!-- Favicon -->   
+<link rel="icon" href="./assets/img/global/little.gif" sizes="any" />
+
+<!-- Socials -->
+<meta property="og:title" content="Portfolio — lajlixo" />
+<meta property="og:description" content="Short, shareable summary." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://yourdomain.com" />
+<meta property="og:image" content="./assets/img/og-image.jpg" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<!-- Styles + JS -->    
+<link rel="preload" href="./assets/css/styles.css?v=0.8" as="style" />
+<link rel="stylesheet" href="./assets/css/colors.css?v=0.8" /> 
+<link rel="stylesheet" href="./assets/css/styles.css?v=0.8" />  
+<script defer src="./assets/js/siema.min.js?v=0.8"></script>
+<script defer src="./assets/js/main.js?v=0.8"></script>
+
+</head>
+<body class="scheme-daylight">
+
+<header class="top">
+  <div class="top__left">
+    <img class="top__avatar" src="./assets/img/global/avatar.jpg" alt="Name" />
+    <span class="top__brand">lajlixo</span>
+  </div>
+  <nav class="top__right">
+     <div class="links">
+      <a href="sphere.html" class="top__link active" style="margin-left:0;cursor:pointer;">Main</a>
+       <a href="about.html" class="top__link" style="margin-left:16px;cursor:pointer;">About</a>
+       <button id="contactBtn" class="top__link" style="margin-left:16px;cursor:pointer;">Contact</button>
+     </div>
+     <button id="themeToggle" class="top__link" style="margin-left:24px;cursor:pointer;" aria-label="Toggle dark/light mode">🌙</button>
+   
+  </nav>
+</header>
+<!-- Contact Modal -->
+<div id="contactModal" class="modal">
+  <div class="modal-content">
+    <span class="close" id="closeModal">&times;</span>
+    <h2>Contact Information</h2>
+    
+    <p><strong>Discord:</strong> <span style="font-weight:normal;">lajlixo</span></p>
+    <p><strong>Roblox:</strong> <a href="https://www.roblox.com/users/10013585857" style="font-weight:normal;">lajlixo</a></p>
+    <p><strong>Email:</strong> <a href="mailto:lajlixo@gmail.com" style="font-weight:normal;">lajlixo@gmail.com</a></p>
+    <p>Or use the <button id="gotoContact" class="modal-link-btn" style="background:none;border:none;color:#6cf;cursor:pointer;text-decoration:underline;font:inherit;padding:0;">contact</button> form on our website.</p>
+  </div>
+</div>
+<section class="hero">
+  <div class="boxed">
+    <h1 class="overview">A minimal portfolio template to showcase your work in one page.</h1>
+  </div>
+</section>
+
+<!-- Portfolio start -->
+<section> 
+  <div class="boxed">
+
+    <!-- Project start -->
+    <div class="slider-group">
+      <div class="siema-wrapper"> 
+        <div class="siema" data-slider="sphere-1">
+          <div><img src="./assets/img/portfolio/sphere-01.jpg" alt="Slide alt text" /></div>
+          <div><img src="./assets/img/portfolio/sphere-01b.jpg" alt="Slide alt text" /></div>
+          <div><img src="./assets/img/portfolio/sphere-01c.jpg" alt="Slide alt text" /></div>        
+        </div>   
+      </div>
+      <span class="slider-controls">
+        <button class="prev" aria-label="Previous slide">Prev</button>
+        <button class="next" aria-label="Next slide">Next</button> 
+      </span> 
+    </div>
+    <h2 class="slider-heading">Project one with slider</h2>
+    <p>Lili <a href="https://onepagelove.com/sphere">between light</a>, texture, and motion through a single, meticulously crafted 3D sphere. Designed in Cinema 4D and rendered with Octane, the sphere serves as both a study in photorealism and a playground for expression.</p>
+   <blockquote><p>This could be a behind-the-scenes aside about the design process or event a customer testimonial.</p></blockquote>      
+    <p><a href="https://onepagelove.com/sphere" class="cta-project" title="Visit custom link">Link →</a></p>
+    <hr />
+
+    <!-- Project start -->
+    <div class="slider-group">
+      <div class="siema-wrapper"> 
+        <div class="siema" data-slider="sphere-2">
+          <div><img src="./assets/img/portfolio/sphere-03.jpg" alt="Slide alt text" /></div>
+          <div><img src="./assets/img/portfolio/sphere-03b.jpg" alt="Slide alt text" /></div>
+          <div><img src="./assets/img/portfolio/sphere-03c.jpg" alt="Slide alt text" /></div>         
+        </div>  
+      </div> 
+      <span class="slider-controls">
+        <button class="prev" aria-label="Previous slide">Prev</button>
+        <button class="next" aria-label="Next slide">Next</button> 
+      </span> 
+    </div>
+    <h2 class="slider-heading">Project two with slider</h2>   
+    <p>Explores the boundaries <a href="https://onepagelove.com/sphere">between light</a>, texture, and motion through a single, meticulously crafted 3D sphere. Designed in Cinema 4D and rendered with Octane, the sphere serves as both a study in photorealism and a playground for expression.</p>
+    <p><a href="https://onepagelove.com/sphere" class="cta-project" title="Visit custom link">Link →</a></p>
+    <hr />
+
+    <!-- Project start -->
+    <img src="./assets/img/portfolio/sphere-02.jpg" alt="Image alt text" />
+    <h2>Project three with one image</h2>   
+    <p>Explores the boundaries <a href="https://onepagelove.com/sphere">between light</a>, texture, and motion through a single, meticulously crafted 3D sphere. Designed in Cinema 4D and rendered with Octane, the sphere serves as both a study in photorealism and a playground for expression.</p>
+    <p><a href="https://onepagelove.com/sphere" class="cta-project" title="Visit custom link">Link →</a></p>
+    <hr />
+
+    <!-- Project start -->
+    <img src="./assets/img/portfolio/sphere-04.jpg" alt="Image alt text" />
+    <h2>Project four with one image</h2>
+    <p>Explores the boundaries <a href="https://onepagelove.com/sphere">between light</a>, texture, and motion through a single, meticulously crafted 3D sphere. Designed in Cinema 4D and rendered with Octane, the sphere serves as both a study in photorealism and a playground for expression.</p> 
+    <p><a href="https://onepagelove.com/sphere" class="cta-project" title="Visit custom link">Link →</a></p>
+    <hr />   
+
+  </div>
+</section>
+
+<!-- Contact Me Section -->
+<section class="contact-section" id="contact">
+  <div class="contact-container">
+    <h2>Contact Me</h2>
+    <form id="contactForm" action="https://formsubmit.co/lajlixo@gmail.com" method="POST">
+      <input type="hidden" name="_captcha" value="false">
+      <div class="form-group">
+        <label for="name">Name<span>*</span></label>
+        <input type="text" id="name" name="name" required placeholder="Your name">
+      </div>
+      <div class="form-group">
+        <label for="email">Email<span>*</span></label>
+        <input type="email" id="email" name="email" required placeholder="Your email">
+      </div>
+      <div class="form-group">
+        <label for="discord">Discord</label>
+        <input type="text" id="discord" name="discord" placeholder="Your Discord (optional)">
+      </div>
+            <div class="form-group">
+        <label for="subject">Subject<span>*</span></label>
+        <input type="text" id="subject" name="subject" required placeholder="Subject">
+      </div>
+      <div class="form-group">
+        <label for="message">Message<span>*</span></label>
+        <textarea id="message" name="message" required placeholder="Type your message"></textarea>
+      </div>
+      <button type="submit" class="contact-submit-btn">Send</button>
+    </form>
+    <div id="contactNotification" class="contact-notification">Message sent successfully!</div>
+  </div>
+</section>
+
+<!-- Portfolio end -->
+
+<footer class="site-footer">
+  <p class="footer-left">© 2025 Your Brand or Name</p>
+  <p class="footer-right">
+  </p>
+</footer>

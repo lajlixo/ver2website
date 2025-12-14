@@ -156,8 +156,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const contactModal = document.getElementById('contactModal');
   const closeModal = document.getElementById('closeModal');
 
+  // Always hide the modal on load if it exists
+  if (contactModal) {
+    contactModal.classList.remove('show');
+  }
+
   if (contactBtn && contactModal && closeModal) {
-    contactModal.classList.remove('show'); // Ensure hidden on load
     contactBtn.addEventListener('click', () => {
       contactModal.classList.add('show');
     });

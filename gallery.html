@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script>
+// Set theme class and background color before anything else, using sessionStorage for instant theme on navigation
+(function() {
+  try {
+    var theme = sessionStorage.getItem('pending-theme') || localStorage.getItem('site-theme');
+    var midnight = 'scheme-midnight', daylight = 'scheme-daylight';
+    var html = document.documentElement, body = document.body;
+    var set = function(cls, bg) {
+      html.className = cls;
+      body.className = cls;
+      html.style.background = bg;
+      body.style.background = bg;
+    };
+    if (theme === midnight) set(midnight, '#191b1f');
+    else if (theme === daylight) set(daylight, '#f7f8fa');
+    else set(midnight, '#191b1f');
+    sessionStorage.removeItem('pending-theme');
+  } catch(e) {}
+})();
+</script>
+<meta name="theme-color" content="#191b1f" media="(prefers-color-scheme: dark)">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Gallery - Sphere</title>
+<meta name="description" content="Gallery page for lajlixo's portfolio.">
+<link rel="canonical" href="https://yourdomain.com/gallery" />
+<meta name="robots" content="index,follow" />
+<link rel="icon" href="./assets/img/global/favicon.ico" sizes="any" />
+<link rel="stylesheet" href="./assets/css/colors.css?v=0.8" />
+<link rel="stylesheet" href="./assets/css/styles.css?v=0.8" />
+<!-- Siema slider removed: no slider, no scrolling, no carousel logic -->
+<script defer src="./assets/js/main.js?v=0.8"></script>
+</head>
+<body>
+<div class="site-content">
+<header class="top">
+  <div class="top__left">
+    <span class="top__brand">lajlixo</span>
+  </div>
+  <nav class="top__right">
+     <div class="links">
+      <a href="index.html" class="top__link" style="margin-left:0;cursor:pointer;">Main</a>
+      <a href="about.html" class="top__link" style="margin-left:16px;cursor:pointer;">About</a>
+      <a href="gallery.html" class="top__link active" style="margin-left:16px;cursor:pointer;">Gallery</a>
+      <button id="contactBtn" class="top__link" style="margin-left:16px;cursor:pointer;">Contact</button>
+     </div>
+     <button id="themeToggle" class="top__link" style="margin-left:24px;cursor:pointer;" aria-label="Toggle dark/light mode">🌙</button>
+  </nav>
+</header>
+<section class="gallery-section">
+  <div class="boxed">
+    <h1 class="overview" style="font-size:2.2rem;margin-bottom:32px;">Gallery</h1>
+    <div class="gallery-albums">
+      <div class="gallery-album" data-album="beach-house">
+        <img src="./assets/img/global/six.jpg" alt="Beach House" class="gallery-thumb" />
+        <div class="gallery-album-title">Beach House</div>
+        <div class="gallery-album-desc">A modern beach house with open spaces and ocean views.</div>
+      </div>
+      <div class="gallery-album" data-album="lobby-map">
+        <img src="./assets/img/portfolio/sphere-03.jpg" alt="Lobby Map" class="gallery-thumb" />
+        <div class="gallery-album-title">Lobby Map</div>
+        <div class="gallery-album-desc">A stylish lobby map with unique lighting and design.</div>
+      </div>
+      <div class="gallery-album" data-album="try-map">
+        <img src="./assets/img/try/waves.jpg" alt="Try Map" class="gallery-thumb" />
+        <div class="gallery-album-title">Try Map</div>
+        <div class="gallery-album-desc">A try.</div>
+      </div>
+    </div>
+  </div>
+</section>
+<div id="galleryModal" class="modal gallery-modal">
+  <div class="modal-content gallery-modal-content">
+    <span class="close" id="closeGalleryModal">&times;</span>
+    <h2 id="galleryModalTitle">Album</h2>
+    <div class="album-desc" id="galleryModalDesc"></div>
+    <div class="album-large-image-container" id="albumLargeImageContainer">
+      <img id="galleryLargeImage" class="album-large-image" src="" alt="Large view" />
+    </div>
+    <div class="album-thumbnails" id="galleryThumbnails"></div>
+  </div>
+</div>
+<footer class="site-footer">
+  <p class="footer-left">© 2025 Your Brand or Name</p>
+</footer>
+</div>
+<script>
+const galleryAlbums = {
+  'beach-house': {
+    title: 'Beach House',
+    desc: 'A modern beach house with open spaces and ocean views.',
+    images: [
+      './assets/img/global/six.jpg',
+      './assets/img/portfolio/sphere-01b.jpg',
+      './assets/img/portfolio/sphere-01c.jpg',
+      './assets/img/portfolio/sphere-02.jpg',
+      './assets/img/portfolio/sphere-02b.jpg',
+      './assets/img/global/six.jpg',
+    ]
+  },
+  'lobby-map': {
+    title: 'Lobby Map',
+    desc: 'A stylish lobby map with unique lighting and design.',
+    images: [
+      './assets/img/global/six.jpg',
+      './assets/img/portfolio/sphere-03b.jpg',
+      './assets/img/portfolio/sphere-03c.jpg',
+      './assets/img/portfolio/sphere-03d.jpg',
+      './assets/img/portfolio/sphere-04.jpg',
+      './assets/img/portfolio/sphere-04b.jpg',
+      './assets/img/portfolio/sphere-04c.jpg',
+    ]
+  },
+  'try-map': {
+    title: 'Try Map',
+    desc: 'A try.',
+    images: [
+      './assets/img/try/waves.jpg',
+      './assets/img/try/mezo.jpg',
+      './assets/img/portfolio/sphere-03c.jpg',
+      './assets/img/portfolio/sphere-03d.jpg',
+      './assets/img/portfolio/sphere-04.jpg',
+      './assets/img/portfolio/sphere-04b.jpg',
+      './assets/img/portfolio/sphere-04c.jpg'
+    ]
+  }
+};
+const galleryModal = document.getElementById('galleryModal');
+const closeGalleryModal = document.getElementById('closeGalleryModal');
+const galleryThumbnails = document.getElementById('galleryThumbnails');
+const galleryModalTitle = document.getElementById('galleryModalTitle');
+const galleryModalDesc = document.getElementById('galleryModalDesc');
+const galleryLargeImage = document.getElementById('galleryLargeImage');
+let currentAlbum = null;
+let currentImageIdx = 0;
+function openGallery(albumKey, startIndex = 0) {
+  const album = galleryAlbums[albumKey];
+  if (!album) return;
+  currentAlbum = albumKey;
+  currentImageIdx = startIndex;
+  galleryModalTitle.textContent = album.title;
+  galleryModalDesc.textContent = album.desc || '';
+    // Set large image with smooth container transition
+    function setLargeImage(src, alt) {
+      const container = document.getElementById('albumLargeImageContainer');
+      const img = galleryLargeImage;
+      // Get current container height
+      const prevHeight = container.offsetHeight;
+      // Fade out current image smoothly
+      img.style.transition = 'opacity 0.35s cubic-bezier(.4,0,.2,1)';
+      img.style.opacity = 0;
+      // Preload new image to get its natural size
+      const tempImg = new window.Image();
+      tempImg.onload = function() {
+        // Animate container height
+        requestAnimationFrame(() => {
+          const newHeight = tempImg.height * (img.offsetWidth / tempImg.width);
+          container.style.height = prevHeight + 'px';
+          container.offsetHeight; // force reflow
+          container.style.transition = 'height 0.45s cubic-bezier(.4,0,.2,1)';
+          container.style.height = newHeight + 'px';
+        });
+        // After fade out, swap image and fade in
+        setTimeout(() => {
+          img.src = src;
+          img.alt = alt;
+          img.onload = function() {
+            img.style.transition = 'opacity 0.45s cubic-bezier(.4,0,.2,1)';
+            img.style.opacity = 1;
+          };
+        }, 180);
+      };
+      tempImg.src = src;
+    }
+    setLargeImage(album.images[startIndex], album.title + ' ' + (startIndex+1));
+    // Thumbnails (all visible, no scrolling, no slider)
+    galleryThumbnails.innerHTML = '';
+    album.images.forEach((src, idx) => {
+      const thumb = document.createElement('img');
+      thumb.src = src;
+      thumb.className = 'gallery-thumb-mini';
+      thumb.alt = album.title + ' thumb ' + (idx+1);
+      if (idx === startIndex) thumb.classList.add('active');
+      thumb.addEventListener('click', () => {
+        currentImageIdx = idx;
+        setLargeImage(src, album.title + ' ' + (idx+1));
+        Array.from(galleryThumbnails.children).forEach((el, i) => {
+          el.classList.toggle('active', i === idx);
+        });
+      });
+      galleryThumbnails.appendChild(thumb);
+    });
+  // Ensure container height is always auto after transition
+  const albumLargeImageContainer = document.getElementById('albumLargeImageContainer');
+  if (albumLargeImageContainer) {
+    albumLargeImageContainer.addEventListener('transitionend', function(e) {
+      if (e.propertyName === 'height') {
+        albumLargeImageContainer.style.transition = '';
+        albumLargeImageContainer.style.height = '';
+      }
+    });
+  }
+  galleryModal.classList.add('show');
+  setTimeout(() => galleryModal.classList.add('visible'), 10);
+}
+document.querySelectorAll('.gallery-album').forEach(album => {
+  album.addEventListener('click', () => {
+    openGallery(album.dataset.album, 0);
+  });
+});
+closeGalleryModal.onclick = function() {
+  galleryModal.classList.remove('visible');
+  setTimeout(() => galleryModal.classList.remove('show'), 300);
+};
+galleryModal.onclick = function(e) {
+  if (e.target === galleryModal) closeGalleryModal.onclick();
+};
+</script>
+</body>
+</html>
